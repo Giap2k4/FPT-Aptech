@@ -1,0 +1,79 @@
+#GIAP {
+    width: 500px;
+    height: 700px;
+    border: 2px solid #000;
+    margin: 20px auto;
+    background-color: #13b677;
+
+}
+
+#top {
+    width: 340px;
+    height: 600px;
+    border: 2px solid #000;
+    margin: 50px auto;
+    display: block;
+}
+
+#register {
+    width: auto;
+    height: 120px;
+    border-bottom: 2px solid #000;
+    background-color: #9738c5;
+}
+h1 {
+    text-align: center;
+    font-size: 25px;
+    color: white;
+}
+.logo {
+    margin-left: 150px;
+}
+#relatives {
+    width: 340px;
+    height: 478px;
+    background-color: #f6f3f3;
+    display: inline-block;
+}
+.username {
+    width: 300px;
+    padding: 5px;
+    background-color: #a6a49c;
+    margin-top: 20px;
+    margin-left: 15px;
+    display: inline-block;
+}
+.logo1 {
+    width: 33px;
+    height: 33px;
+    border-radius: 2px;
+    background-color:  #9738c5;
+    padding-top: 3px;
+    float: left;
+}
+input {
+    float: right;
+    width: 230px;
+    height: 32px;
+}
+a{
+    text-decoration: none;
+    color: #9b06e3;
+}
+#signup {
+    width: 300px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    background-color: #9b06e3;
+}
+#check {
+    float: left;
+    width: 17px;
+    height: 13px;
+}
+#end {
+    text-align: center;
+}
+#jv1, #jv2, #jv3, #jv4 {
+    margin-left: 20px;
+}
