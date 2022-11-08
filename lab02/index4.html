@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-  <link rel="stylesheet" href="main2.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
 </head>
-<body>
-<h1>Potatoes</h1>
-<p id="intro">There are <i>dozens</i> of different <b>potato</b> varieties.</p>
-<p> They are usually described as early, second early and maincrop.</p>
-
+<body ng-app>
+  Enter Your Name <input type="text" ng-model="name"/>
+<div>
+  Hello {{name}}
+</div>
 </body>
 </html>

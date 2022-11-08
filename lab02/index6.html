@@ -2,17 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
-  <link rel="stylesheet" href="main6.css">
+  <title>Demo for ng-show and ng-hide</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
 </head>
-<body>
-<h1>Marine Biology</h1>
-<h2>The composition of Seawater</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-  Aspernatur assumenda dicta illum minima quas quasi quidem ratione voluptate.
-  Accusantium assumenda in libero odit perspiciatis qui quibusdam quod sequi, sit veniam!
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-  Aperiam est iste mollitia nam nisi quae quas quidem quo veritatis vero.
-  Deleniti fugiat hic optio praesentium vel. Dolores quod soluta tempore.</p>
+<body ng-app="">
+    <p>Do you want to hide the list of cities?</p>
+    <input type="checkbox" ng-model="myVar">
+    <ul ng-hide="myVar">
+      <li>Nairobi</li>
+      <li>London</li>
+      <li>Paris</li>
+    </ul>
 </body>
 </html>
