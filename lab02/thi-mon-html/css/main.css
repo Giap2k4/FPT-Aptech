@@ -77,3 +77,7 @@ a{
 #jv1, #jv2, #jv3, #jv4 {
     margin-left: 20px;
 }
+#jv1{
+    color: #9b06e3;
+    font-size: 20px;
+}
