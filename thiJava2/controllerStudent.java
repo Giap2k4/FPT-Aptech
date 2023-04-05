@@ -51,11 +51,9 @@ public class controllerStudent {
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
-                int i = -1;
-                i++;
-                list.remove(i);
-                break;
+               
             }
+		list.clear();
 
 
     }
