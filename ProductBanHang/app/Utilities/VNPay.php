@@ -12,9 +12,9 @@ class VNPay
      * config.php
      *
      */
-    static $vnp_TmnCode = ""; //Mã website tại VNPAY
-    static $vnp_HashSecret = ""; //Chuỗi bí mật
-    static $vnp_Url = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+    static $vnp_TmnCode = "V48PQ0KPV48PQ0KP"; //Mã website tại VNPAY
+    static $vnp_HashSecret = "FUKUJVNVIXBEASQDBKDJHMLFGFQSJZDE"; //Chuỗi bí mật
+    static $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
     static $vnp_Returnurl = "/checkout/vnPayCheck"; //Chú ý cấu hình env('APP_URL') khi sử dụng biến này.
 
     /**
@@ -24,7 +24,7 @@ class VNPay
      *
      * @param array $data
      * [ <br>
-     * vnp_TnxRef => ' ', //Mã tham chiếu của giao dịch tại hệ thống của merchant. Mã này là duy nhất đùng để phân biệt các đơn hàng gửi sang VNPAY. Không được trùng lặp trong ngày. Ví dụ: 23554 <br> <br>
+     * vnp_TxnRef => ' ', //Mã tham chiếu của giao dịch tại hệ thống của merchant. Mã này là duy nhất đùng để phân biệt các đơn hàng gửi sang VNPAY. Không được trùng lặp trong ngày. Ví dụ: 23554 <br> <br>
      * vnp_OrderInfo => ' ', //Thông tin mô tả nội dung thanh toán (Tiếng Việt, không dấu). Ví dụ: **Nap tien cho thue bao 0123456789. So tien 100,000 VND** <br> <br>
      * vnp_Amount => ' ', Số tiền thanh toán. Số tiền không mang các ký tự phân tách thập phân, phần nghìn, ký tự tiền tệ. Để gửi số tiền thanh toán là 10,000 VND (mười nghìn VNĐ) thì merchant cần nhân thêm 100 lần (khử phần thập phân), sau đó gửi sang VNPAY là: 1000000 <br>
      * ]
@@ -41,8 +41,7 @@ class VNPay
          */
         //require_once("./config.php");
 
-
-        $vnp_TnxRef = $data['vnp_TnxRef']; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+        $vnp_TxnRef = $data['vnp_TxnRef']; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = $data['vnp_OrderInfo'];
         $vnp_OrderType = 100000; // Loại hàng hóa: Thực Phẩm - Tiêu Dùng (Xem thêm mã tại: https://sandbox.vnpayment.vn/apis/docs/loai-hang-hoa)
         $vnp_Amount = $data['vnp_Amount'] * 100;
@@ -63,7 +62,7 @@ class VNPay
             "vnp_OrderInfo" => $vnp_OrderInfo,
             "vnp_OrderType" => $vnp_OrderType,
             "vnp_ReturnUrl" => env('APP_URL') . self::$vnp_Returnurl,
-            "vnp_TnxRef" => $vnp_TnxRef,
+            "vnp_TxnRef" => $vnp_TxnRef,
         );
 
         //thêm 'vnp_BankCode'

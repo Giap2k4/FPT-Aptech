@@ -9,7 +9,7 @@
     <meta name="keywords" content="codelean, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('title') | GiapOnline</title>
+    <title>@yield('title') | Giáp</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
@@ -44,7 +44,7 @@
             <div class="ht-left">
                 <div class="mail-service">
                     <i class="fa fa-envelope"></i>
-                    giap15062004@gmail.com
+                    giap@gmail.com
 
                 </div>
                 <div class="phone-service">
@@ -55,7 +55,17 @@
             </div>
 
             <div class="ht-right">
-                <a href="login.html" class="login-panel"><i class="fa fa-user"></i>Login</a>
+
+               @if(Auth::check())
+                    <a href="./account/logout" class="login-panel">
+                        <i class="fa fa-user"></i>
+                        {{ Auth::user()->name }} - Logout
+                    </a>
+
+                @else
+                    <a href="./account/login" class="login-panel"><i class="fa fa-user"></i>Login</a>
+               @endif
+
                 <div class="lan-selector">
                     <select   select class="language_drop" name="countries" id="countries" style="width: 300px;">
                         <option value="yt" data-image="front/img/flag-1.jpg" data-imagecss="flag yt"
@@ -80,7 +90,7 @@
             <div class="row">
                 <div class="col-lg-2 col-md-2">
                     <div class="logo">
-                        <a href="index.html">
+                        <a href="/">
                             <img src="front/img/logo.png" height="25">
                         </a>
                     </div>
@@ -142,7 +152,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li class="cart-price">$${{ Cart::total() }}</li>
+                        <li class="cart-price">${{ Cart::total() }}</li>
                     </ul>
                 </div>
             </div>
@@ -182,12 +192,13 @@
                     <li class="{{ request()->segment(1) == 'contact' ? 'active' : '' }}" ><a href="./contact">Contact</a></li>
                     <li><a href="">Pages</a>
                         <ul class="dropdown">
-                            <li><a href="blog-details.html">Blog Details</a></li>
-                            <li><a href="shopping-cart.html">Shopping Cart</a></li>
-                            <li><a href="check-out.html">Checkout</a></li>
-                            <li><a href="faq.html">Faq</a></li>
-                            <li><a href="register.html">Register</a></li>
-                            <li><a href="login.html">Login</a></li>
+                            <li><a href="./account/my-order">My Order</a></li>
+                            <li><a href="./blog-details">Blog Details</a></li>
+                            <li><a href="./cart">Shopping Cart</a></li>
+                            <li><a href="./checkout">Checkout</a></li>
+                            <li><a href="./faq">Faq</a></li>
+                            <li><a href="./register">Register</a></li>
+                            <li><a href="./account/login">Login</a></li>
 
                         </ul>
                     </li>

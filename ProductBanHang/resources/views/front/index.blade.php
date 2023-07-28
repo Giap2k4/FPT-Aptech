@@ -97,7 +97,7 @@
                         </ul>
                     </div>
                     <div class="product-slider owl-carousel women">
-                        @foreach($womenproducts as $womenproduct)
+                        @foreach($featuredProducts['women'] as $womenproduct)
                             @include('front.components.product-item', ['product' => $womenproduct])
                         @endforeach
                     </div>
@@ -162,7 +162,7 @@
                         </ul>
                     </div>
                     <div class="product-slider owl-carousel men">
-                        @foreach($menproducts as $menproduct)
+                        @foreach($featuredProducts['men'] as $menproduct)
                             @include('front.components.product-item', ['product' => $menproduct])
                         @endforeach
                     </div>

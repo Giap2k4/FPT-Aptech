@@ -12,8 +12,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <a href="index.html"><i class="fa fa-home"></i></a>
-                        <a href="shop.html">Shop</a>
+                        <a href="./home"><i class="fa fa-home"></i></a>
+                        <a href="./shop">Shop</a>
                         <span>Detail</span>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                                 <div class="pd-rating">
 
                                     @for($i = 1; $i <= 5; $i++)
-                                        @if($i <= $avgRating)
+                                        @if($i <= $product->avgRating)
                                             <i class="fa fa-star"></i>
                                         @else
                                             <i class="fa fa-star-o"></i>
@@ -148,7 +148,7 @@
                                                     <div class="pd-rating">
 
                                                         @for($i = 1; $i <= 5; $i++)
-                                                            @if($i <= $avgRating)
+                                                            @if($i <= $product->avgRating)
                                                                 <i class="fa fa-star"></i>
                                                             @else
                                                                 <i class="fa fa-star-o"></i>
@@ -227,7 +227,7 @@
                                                     <div class="avatar-text">
                                                         <div class="at-rating">
                                                             @for($i = 1; $i <= 5; $i++)
-                                                                @if($i <= $avgRating)
+                                                                @if($i <= $product->avgRating)
                                                                     <i class="fa fa-star"></i>
                                                                 @else
                                                                     <i class="fa fa-star-o"></i>

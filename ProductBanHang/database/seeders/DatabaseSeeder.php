@@ -15,6 +15,143 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // \App\Models\User::factory(10)->create();
+
+        DB::table('users')->insert([
+            [
+                'id' => 1,
+                'name' => 'CodeLean',
+                'email' => 'CodeLean@gmail.com',
+                'password' => Hash::make('123456'),
+                'avatar' => null,
+                'level' => 2,
+                'description' => null,
+
+                'company_name' => 'CodeGym',
+                'country' => 'Viet Nam',
+                'street_address' => 'Mon City, My Dinh 2, Nam Tu Liem',
+                'postcode_zip' => '10000',
+                'town_city' => 'Ha Noi',
+                'phone' => '02462538829',
+            ],
+            [
+                'id' => 2,
+                'name' => 'admin',
+                'email' => 'admin@gmail.com',
+                'password' => Hash::make('123456'),
+                'avatar' => null,
+                'level' => 2,
+                'description' => null,
+
+                'company_name' => 'CodeGym',
+                'country' => 'Viet Nam',
+                'street_address' => 'Mon City, My Dinh 2, Nam Tu Liem',
+                'postcode_zip' => '10000',
+                'town_city' => 'Ha Noi',
+                'phone' => '02462538829',
+            ],
+
+            [
+                'id' => 3,
+                'name' => 'Shane Lynch',
+                'email' => 'ShaneLynch@gmail.com',
+                'password' => Hash::make('123456'),
+                'avatar' => 'avatar-0.png',
+                'level' => 1,
+                'description' => 'Aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum bore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud amodo',
+
+                'company_name' => 'CodeGym',
+                'country' => 'Viet Nam',
+                'street_address' => 'Mon City, My Dinh 2, Nam Tu Liem',
+                'postcode_zip' => '10000',
+                'town_city' => 'Ha Noi',
+                'phone' => '02462538829',
+            ],
+            [
+                'id' => 4,
+                'name' => 'Brandon Kelley',
+                'email' => 'BrandonKelley@gmail.com',
+                'password' => Hash::make('123456'),
+                'avatar' => 'avatar-1.png',
+                'level' => 1,
+                'description' => null,
+
+                'company_name' => 'CodeGym',
+                'country' => 'Viet Nam',
+                'street_address' => 'Mon City, My Dinh 2, Nam Tu Liem',
+                'postcode_zip' => '10000',
+                'town_city' => 'Ha Noi',
+                'phone' => '02462538829',
+            ],
+            [
+                'id' => 5,
+                'name' => 'Roy Banks',
+                'email' => 'RoyBanks@gmail.com',
+                'password' => Hash::make('123456'),
+                'avatar' => 'avatar-2.png',
+                'level' => 1,
+                'description' => null,
+
+                'company_name' => 'CodeGym',
+                'country' => 'Viet Nam',
+                'street_address' => 'Mon City, My Dinh 2, Nam Tu Liem',
+                'postcode_zip' => '10000',
+                'town_city' => 'Ha Noi',
+                'phone' => '02462538829',
+            ],
+        ]);
+
+        DB::table('blogs')->insert([
+            [
+                'user_id' => 3,
+                'title' => 'The Personality Trait That Makes People Happier',
+                'subtitle'=> '',
+                'image' => 'blog-1.jpg',
+                'category' => 'TRAVEL',
+                'content' => '',
+            ],
+            [
+                'user_id' => 3,
+                'title' => 'This was one of our first days in Hawaii last week.',
+                'subtitle'=> '',
+                'image' => 'blog-2.jpg',
+                'category' => 'CodeLeanON',
+                'content' => '',
+            ],
+            [
+                'user_id' => 3,
+                'title' => 'Last week I had my first work trip of the year to Sonoma Valley',
+                'subtitle'=> '',
+                'image' => 'blog-3.jpg',
+                'category' => 'TRAVEL',
+                'content' => '',
+            ],
+            [
+                'user_id' => 3,
+                'title' => 'Happppppy New Year! I know I am a little late on this post',
+                'subtitle'=> '',
+                'image' => 'blog-4.jpg',
+                'category' => 'CodeLeanON',
+                'content' => '',
+            ],
+            [
+                'user_id' => 3,
+                'title' => 'Absolue collection. The Lancome team has been one…',
+                'subtitle'=> '',
+                'image' => 'blog-5.jpg',
+                'category' => 'MODEL',
+                'content' => '',
+            ],
+            [
+                'user_id' => 3,
+                'title' => 'Writing has always been kind of therapeutic for me',
+                'subtitle'=> '',
+                'image' => 'blog-6.jpg',
+                'category' => 'CodeLeanON',
+                'content' => '',
+            ],
+        ]);
+
         DB::table('brands')->insert([
             [
                 'name' => 'Calvin Klein',
@@ -284,8 +421,6 @@ class DatabaseSeeder extends Seeder
                 'rating' => 4,
             ],
         ]);
-
     }
-
 }
 

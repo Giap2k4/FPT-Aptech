@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Services\OrderDetail\OrderDetailServiceInterface;
+use App\Utilities\Constant;
 use App\Utilities\VNPay;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -12,6 +14,19 @@ use Illuminate\Support\Facades\Mail;
 
 class CheckOutController extends Controller
 {
+
+    private $orderService;
+    private $orderDetailService;
+
+    public function __construct(OrderDetailServiceInterface $detailService,
+                                OrderDetailServiceInterface $orderDetailService)
+    {
+        $this->orderService = $detailService;
+        $this->orderDetailService = $orderDetailService;
+
+    }
+
+
     //
     public function index() {
 
@@ -24,7 +39,9 @@ class CheckOutController extends Controller
 
     public function addOrder(Request $request) {
         //1. Thêm đơn hàng
-        $order = Order::create($request->all());
+        $data = $request->all();
+        $data['status'] = Constant::order_status_ReceiveOrders;
+        $order = Order::create($data);
 
         //2. Thêm chi tiết đơn hàng
         $carts = Cart::content();
@@ -58,7 +75,7 @@ class CheckOutController extends Controller
         if( $request->payment_type == 'online_payment') {
             //1. Lấy URL thanh toán VNPay
             $data_url = VNPay::vnpay_create_payment([
-                'vnp_TnxRef' => $order->id, //ID đơn hàng
+                'vnp_TxnRef' => $order->id, //ID đơn hàng
                 'vnp_OrderInfo' => 'Mô tả về đơn hàng ở đây...',
                 'vnp_Amount' => Cart::total(0,'', '') * 23075,
             ]);
@@ -77,7 +94,7 @@ class CheckOutController extends Controller
         //1. Lấy data từ URL (do VNPAY gửi về qua $vnp_Returnurl
 
         $vnp_ResponseCode = $request->get('vnp_ResponseCode'); // Mã phản hồi thanh toán . 00 = Thành công
-        $vnp_TnxRef = $request->get('vnp_TnxRef'); //ticket_id
+        $vnp_TxnRef = $request->get('vnp_TxnRef'); //ticket_id
         $vnp_Amount = $request->get('vnp_Amount');
 
 
@@ -85,8 +102,11 @@ class CheckOutController extends Controller
         if($vnp_ResponseCode != null) {
           //  Nếu thành công
             if ($vnp_ResponseCode == 00) {
+                //Cập nhật trạng thái Order:
+                $this->orderService->update(['status' => Constant::order_status_Paid,], $vnp_TxnRef);
+
                 //Gửi: Email
-                $order = Order::find($vnp_TnxRef);
+                $order = Order::find($vnp_TxnRef);
                 $total = Cart::total();
                 $subtotal = Cart::subtotal();
                 $this->sendEmail($order, $total, $subtotal);
@@ -101,7 +121,7 @@ class CheckOutController extends Controller
             else {
                 // Nếu không thành công
                 // xóa đơn hàng đã thêm vào Database
-                Order::find($vnp_TnxRef)->delete();
+                Order::find($vnp_TxnRef)->delete();
                 // trả về thông báo lỗi.
                 return redirect('checkout/result')->with('notification', 'ERROR: Payment failed or canceled');
 

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Front\Homecontroller;
 use \App\Models\User;
 use App\Http\Controllers\Front;
+use App\Http\Controllers\Admin;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,13 @@ use App\Http\Controllers\Front;
 |
 */
 
+
+//Route::get('/', function (\App\Reponsitories\Product\ProductReponsitoryInterface $productReponsitory) {
+//    return $productReponsitory->all();
+//});
+
+// Front (Client)
+
 Route::get('/', [Homecontroller::class, 'index']);
 
 
@@ -23,9 +31,7 @@ Route::get('/', [Homecontroller::class, 'index']);
 Route::prefix('shop')->group(function () {
     Route::get('/product/{id}', [Front\ShopController::class, 'show']);
     Route::post('/product/{id}', [Front\ShopController::class, 'postComment']);
-
     Route::get('/', [Front\ShopController::class, 'index']);
-
     Route::get('/{categoryName}', [Front\ShopController::class,'category']);
 });
 
@@ -50,8 +56,50 @@ Route::prefix('checkout')->group(function () {
 
 });
 
-//Route::get('/', function (){
-//    return User::all();
-//});
 
+Route::prefix('account')->group(function () {
+    Route::get('/login', [Front\AccountController::class, 'login']);
+    Route::post('/login', [Front\AccountController::class, 'checkLogin']);
+
+    Route::get('logout', [Front\AccountController::class, 'logout']);
+
+    Route::get('/register', [Front\AccountController::class, 'register']);
+    Route::post('/register', [Front\AccountController::class, 'postRegister']);
+
+    Route::prefix('my-order')->middleware('CheckMemberLogin')->group(function () {
+        Route::get('/', [Front\AccountController::class, 'myOrderIndex']);
+        Route::get('/{id}', [Front\AccountController::class, 'myOrderShow']);
+
+    });
+
+    });
+
+
+
+
+// Admin
+Route::prefix('admin')->middleware('CheckAdminLogin')->group(function () {
+   Route::redirect('', 'admin/user');
+
+    Route::resource('user', Admin\UserController::class);
+    Route::resource('category', Admin\ProductCategoryController::class);
+    Route::resource('brand', Admin\BrandConller::class);
+    Route::resource('product/{product_id}/image', Admin\ProductImageController::class);
+    Route::resource('product/{product_id}/detail', Admin\ProductDetailController::class);
+    Route::resource('product', Admin\ProductController::class);
+    Route::resource('order', Admin\OrderController::class);
+
+
+
+
+
+
+
+    Route::prefix('login')->group(function () {
+       Route::get('', [Admin\HomeController::class, 'getLogin'])->withoutMiddleware('CheckAdminLogin');
+       Route::post('', [Admin\HomeController::class, 'postLogin'])->withoutMiddleware('CheckAdminLogin');
+   });
+
+   Route::get('logout', [Admin\HomeController::class, 'logout']);
+});
 
